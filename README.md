@@ -39,103 +39,74 @@ A simple Java desktop application for managing books: add, view, delete, borrow,
    ```bash
    git clone https://github.com/yourusername/library-management-system.git
    cd library-management-system
-Create the database
 
-Open MySQL and run the SQL script in src/main/resources/db-schema.sql to create the library schema and tables.
-
-(Optional) Create a test_library schema for running automated tests.
-
-Configure database connection
-Edit src/main/resources/db.properties:
-
-properties
-
-jdbc.url=jdbc:mysql://localhost:3306/library
-jdbc.username=your_user
-jdbc.password=your_password
-Build the project
-
-
-mvn clean compile
-Usage
-Run from Maven
-
-mvn exec:java -Dexec.mainClass="gui.LibraryGUI"
-Build and Run JAR
-
-mvn package
-java -jar target/library-system-1.0-SNAPSHOT.jar
-Project Structure
-
+## Project Structure
 
 library-management-system/
 ├── pom.xml
 ├── src
-│   ├── main
-│   │   ├── java
-│   │   │   ├── app
-│   │   │   │   └── Main.java
-│   │   │   ├── dao
-│   │   │   │   ├── BookDAO.java
-│   │   │   │   └── BorrowDAO.java
-│   │   │   ├── model
-│   │   │   │   ├── Book.java
-│   │   │   │   └── BorrowRecord.java
-│   │   │   ├── gui
-│   │   │   │   ├── AddBookDialog.java
-│   │   │   │   ├── ViewBooksDialog.java
-│   │   │   │   ├── DeleteBookDialog.java
-│   │   │   │   ├── BorrowBookDialog.java
-│   │   │   │   ├── ReturnBookDialog.java
-│   │   │   │   └── BorrowRecordDialog.java
-│   │   │   └── util
-│   │   │       └── DBUtil.java
-│   │   └── resources
-│   │       └── db.properties
-│   └── test
-│       ├── java
-│       │   ├── dao
-│       │   │   ├── BookDAOTest.java
-│       │   │   └── BorrowDAOTest.java
-│       └── resources
-│           └── test-data.sql
+│ ├── main
+│ │ ├── java
+│ │ │ ├── app
+│ │ │ │ └── Main.java
+│ │ │ ├── dao
+│ │ │ │ ├── BookDAO.java
+│ │ │ │ └── BorrowDAO.java
+│ │ │ ├── model
+│ │ │ │ ├── Book.java
+│ │ │ │ └── BorrowRecord.java
+│ │ │ ├── gui
+│ │ │ │ ├── AddBookDialog.java
+│ │ │ │ ├── ViewBooksDialog.java
+│ │ │ │ ├── DeleteBookDialog.java
+│ │ │ │ ├── BorrowBookDialog.java
+│ │ │ │ ├── ReturnBookDialog.java
+│ │ │ │ └── BorrowRecordDialog.java
+│ │ │ └── util
+│ │ │ └── DBUtil.java
+│ │ └── resources
+│ │ └── db.properties
+│ └── test
+│ ├── java
+│ │ ├── dao
+│ │ │ ├── BookDAOTest.java
+│ │ │ └── BorrowDAOTest.java
+│ └── resources
+│ └── test-data.sql
 └── README.md
-Architecture Overview
-We follow a four-layer design:
-
-Model Layer
-
-Plain Java objects (Book, BorrowRecord) that map to database tables.
-
-DAO Layer
-
-BookDAO: handles addBook(), getAllBooks(), deleteBookById().
-
-BorrowDAO: handles borrowBook(), returnBook(), showAllBorrowRecords().
-
-GUI Layer
-
-Swing dialogs (JDialog) for each feature and a main window (LibraryGUI).
-
-Utility Layer
-
-DBUtil.getConnection(): centralizes JDBC configuration and resource management.
-
-Running Tests
-Execute all JUnit tests against the test_library schema:
 
 
+---
+
+## Architecture Overview
+
+We follow a **four-layer** design:
+
+1. **Model Layer**  
+   Plain Java objects (`Book`, `BorrowRecord`) that map to database tables.
+
+2. **DAO Layer**  
+   - `BookDAO`: handles `addBook()`, `getAllBooks()`, `deleteBookById()`.  
+   - `BorrowDAO`: handles `borrowBook()`, `returnBook()`, `showAllBorrowRecords()`.
+
+3. **GUI Layer**  
+   Swing dialogs (`JDialog`) for each feature and a main window (`LibraryGUI`).
+
+4. **Utility Layer**  
+   `DBUtil.getConnection()`: centralizes JDBC configuration and resource management.
+
+---
+
+## Running Tests
+
+Execute all JUnit tests against the `test_library` schema:
+
+```bash
 mvn test
-Packaging
-Build an executable JAR:
 
+Build an executable JAR:mvn package
+The resulting JAR is located at:target/library-system-1.0-SNAPSHOT.jar
 
-mvn package
-The resulting JAR is located at:
-
-pgsql
-
-target/library-system-1.0-SNAPSHOT.jar
 Contributing
 Fork the repository
 
